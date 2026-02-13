@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAINEL</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+    <div class="container painel">
+
+    <h1>BEM VINDO AO PAINEL👋 </h1>
+
+    <P>Se você está vendo isso é por que está logado!</P>
+
+    <button onclick="sair()">Sair</button>
+
+    </div>
+
+    <script>
+        //verifica se está logado
+        if(localStorage.getItem("logado") !== "true") {
+
+            // se não estiver, volta para o login 
+            window.location.href = "index.html"
+        }
+
+        //para sair
+        function sair() {
+            localStorage.removeItem("logado");
+            window.location.href = "index.html"
+        }
+    </script>
+    
+</body>
+</html>

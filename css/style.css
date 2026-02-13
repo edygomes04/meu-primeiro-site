@@ -1,3 +1,7 @@
+
+
+/*Pagina Login*/
+
 body {
     background-color: #f2f2f2;
     font-family: Arial, sans-serif;
@@ -31,4 +35,38 @@ body {
     background-color: white;
     padding: 30px;
     border-radius: 8px;
+  }
+
+  /* Pagina Painel*/
+
+  .painel {
+    text-align:center
+  }
+
+  .painel h1 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+  }
+
+  .painel p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 30px;
+  }
+
+  /*Botão SAIR */
+
+  .btn-sair {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+/*efeito ao passar o mouse*/
+  .btn-sair :hover {
+    background-color: #c0392b;
   }
