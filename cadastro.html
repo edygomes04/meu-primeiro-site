@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Criar conta</h1>
+
+    <form id="cadastroForm">
+
+    <input type="text" id="nome" placeholder="Digite seu nome">
+    <br><br>
+
+    <input type="email" id="email" placeholder="Digite seu e-mail">
+    <br><br>
+
+    <input type="Password" id="senha" placeholder="Crie uma senha">
+    <br><br>
+
+    <button type="submit" class="btn-entrar">Cadastrar</button>
+
+<button type="button" class="btn-entrar" onclick="voltar()">voltar</button>
+
+
+</form>
+</div>
+   <script>
+    function voltar(){
+        window.location.href = "index.html";
+    }
+   </script>
+</body>
+</html>
