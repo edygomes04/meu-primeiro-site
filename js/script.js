@@ -68,6 +68,14 @@ document.addEventListener("DOMContentLoaded", function () {
     if (senhaDigitada === senhaCorreta) {
       mensagem.innerText = "Acesso permitido";
       mensagem.style.color = "green";
+
+      //salva que o usuário está logado
+      localStorage.setItem("logado","true");
+      
+      //redireciona para a pagina do painel
+      window.location.href = "painel.html";
+      
+
       tentativas = 0; // reseta tentativas ao acertar
       senhaInput.value = ""; // limpa o campo
       return;
