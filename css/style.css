@@ -67,6 +67,6 @@ body {
   }
 
 /*efeito ao passar o mouse*/
-  .btn-sair :hover {
+  .btn-sair:hover {
     background-color: #c0392b;
   }

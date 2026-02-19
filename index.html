@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
-    <title>Meu primeiro site</title>
+    <title>Login</title>
     
     <link rel="stylesheet" href="css/style.css">
 
@@ -11,14 +11,33 @@
     <div class="container">
     <h1>ESLEY GOMES BARROS</h1>
     
-    <p>Este é meu primeiro site. Estou iniciando na programação...novamente.</p>
+    <p>Desenvolvedor em formação.
+    <br><br>
+    Acesse para conhecer meus projetos e acompanhar minha evolução na programação.
+    </p>
 
     <form id="loginForm">
+      
+      <input 
+       type="email"
+       id="email"
+       placeholder="Digite seu e-mail"
+       required
+       >
+       <br><br>
 
-    <input type="password"  id="senha" placeholder="Digite a senha">
+    <input type="password"  id="senha" placeholder="Digite a senha"
+    required
+    >
+    <br><br>
 
     <button class="btn-entrar" type="submit">ENTRAR</button>
     </form>
+
+    <p>
+      Ainda não tem conta?
+      <a href="cadastro.html">Cadastre-se</Cadastre-se></a>
+    </p>
 
     <p id="mensagem"></p>
 

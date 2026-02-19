@@ -1,59 +1,54 @@
-// ===============================
-// CONTROLE DE TENTATIVAS
-// ===============================
 
 // Quantidade de tentativas feitas (pode mudar → let)
 let tentativas = 0;
 
-// Limite máximo permitido (valor fixo → const)
 const LIMITE_TENTATIVAS = 3;
 
-// ===============================
 // GARANTE QUE O HTML JÁ CARREGOU
-// ===============================
-
 document.addEventListener("DOMContentLoaded", function () {
 
-  // ===============================
   // PEGANDO ELEMENTOS DO HTML
-  // ===============================
+   const form = document.getElementById("loginForm");   
+   const emailInput = document.getElementById("email");
+   const senhaInput = document.
+   getElementById("senha"); 
+   const mensagem = document.getElementById("mensagem"); 
+ 
+   //recupera o usuário salvo no cadastro
+ const usuarioSalvo = JSON.parse(localStorage.getItem("usuario"));
+  // Define email/senha correta com base no cadastro
+ const emailCorreto = usuarioSalvo ? usuarioSalvo.email: null;
+ 
+ const senhaCorreta = usuarioSalvo ? usuarioSalvo.senha : null;
 
-  const form = document.getElementById("loginForm"); // formulário
-  const senhaInput = document.getElementById("senha"); // input da senha
-  const mensagem = document.getElementById("mensagem"); // texto de feedback
+   // EVENTO DO FORMULÁRIO (ENTER ou clique)
+   form.addEventListener("submit", function (event) {
+    event.preventDefault();    
+    entrar(); 
+    });
 
-  // Senha correta do sistema (simulação)
-  const senhaCorreta = "1234";
-
-  // ===============================
-  // EVENTO DO FORMULÁRIO (ENTER ou clique)
-  // ===============================
-
-  form.addEventListener("submit", function (event) {
-    event.preventDefault(); // impede recarregar a página
-    entrar(); // chama a função principal
-  });
-
-  // ===============================
-  // LIMPA MENSAGEM QUANDO DIGITA
-  // ===============================
-
-  senhaInput.addEventListener("input", function () {
+    // LIMPA MENSAGEM QUANDO DIGITA
+    emailInput.addEventListener("input", limparMensagem);
+    senhaInput.addEventListener("input", limparMensagem);
+    
+    function limparMensagem() {
     mensagem.innerText = "";
-  });
+  }
 
-  // ===============================
   // FUNÇÃO PRINCIPAL DE LOGIN
-  // ===============================
+    function entrar() {
 
-  function entrar() {
-
-    // Pega o valor digitado pelo usuário
+  // Pega o valor digitado pelo usuário
+    const emailDigitado = emailInput.value
+     
     const senhaDigitada = senhaInput.value;
 
-    // ===============================
-    // VALIDAÇÃO: SENHA CURTA
-    // ===============================
+    if (!emailDigitado || !senhaDigitada) {
+      mensagem.innerText ="Preencha email e senha";
+      mensagem.style.color = "orange";
+      return;
+    } 
+
 
     if (senhaDigitada.length < 4) {
       mensagem.innerText = "Senha muito curta";
@@ -61,11 +56,15 @@ document.addEventListener("DOMContentLoaded", function () {
       return; // para a função aqui
     }
 
-    // ===============================
-    // SENHA CORRETA
-    // ===============================
+    //Não cadastrado
+     if (!usuarioSalvo) {
+      mensagem.innerText = "Nenhum usuário cadastrado";
+      mensagem.style.color = "red";
+      return;
+    }
 
-    if (senhaDigitada === senhaCorreta) {
+    // SENHA CORRETA
+    if (emailDigitado === emailCorreto && senhaDigitada === senhaCorreta) {
       mensagem.innerText = "Acesso permitido";
       mensagem.style.color = "green";
 
@@ -74,26 +73,18 @@ document.addEventListener("DOMContentLoaded", function () {
       
       //redireciona para a pagina do painel
       window.location.href = "painel.html";
-      
-
-      tentativas = 0; // reseta tentativas ao acertar
-      senhaInput.value = ""; // limpa o campo
       return;
-    }
-
-    // ===============================
+}
     // SENHA INCORRETA
-    // ===============================
-
     tentativas++; // soma 1 tentativa
 
-    let restantes = LIMITE_TENTATIVAS - tentativas;
+    const restantes = LIMITE_TENTATIVAS - tentativas;
 
     if (restantes > 0) {
-      mensagem.innerText = `Senha incorreta. Tentativas restantes: ${restantes}`;
+      mensagem.innerText = `Email ou senha incorretos. Tentativas restantes: ${restantes}`;
       mensagem.style.color = "red";
     } else {
-      mensagem.innerText = "Acesso bloqueado. Tente mais tarde.";
+      mensagem.innerText = "Acesso bloqueado. Tente novamente mais tarde.";
       mensagem.style.color = "darkred";
       senhaInput.disabled = true; // bloqueia o input
     }
