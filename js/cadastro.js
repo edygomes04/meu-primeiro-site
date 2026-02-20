@@ -1,6 +1,7 @@
-// Espera o HTML carregar
 
+// Espera o HTML carregar
 document.addEventListener("DOMContentLoaded", function() {
+
 
     //captura o formulário do cadastro
 
@@ -22,15 +23,31 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log(email);
         console.log(senha);
 
-        //cria um objeto com os dados do usuário
-       const usuario = {
+      //pega lista de usuários ou cria uma lista vazia 
+      let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+      //verifica se já existe alguém com esse email
+      const emailExiste = usuarios.some(function(u){
+        return u.email === email;
+      });
+
+      if(emailExiste){
+        alert("Este email já está cadastrado!");
+        return;
+      }
+      
+      //cria objeto do usuário
+      const usuario = {
         nome: nome,
         email: email,
-        senha: senha
-       };
+        senha: senha,
+      };
 
-       //Salva no localStorage
-       localStorage.setItem("usuario", JSON.stringify(usuario));
+      //adiciona na lista
+      usuarios.push(usuario);
+
+      //salva lista atualizada
+      localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
        console.log("Usuário salvo com sucesso");
 

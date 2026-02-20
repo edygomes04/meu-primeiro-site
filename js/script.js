@@ -14,12 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
    getElementById("senha"); 
    const mensagem = document.getElementById("mensagem"); 
  
-   //recupera o usuário salvo no cadastro
- const usuarioSalvo = JSON.parse(localStorage.getItem("usuario"));
-  // Define email/senha correta com base no cadastro
- const emailCorreto = usuarioSalvo ? usuarioSalvo.email: null;
- 
- const senhaCorreta = usuarioSalvo ? usuarioSalvo.senha : null;
+  //recupera lista de usuários
+  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
    // EVENTO DO FORMULÁRIO (ENTER ou clique)
    form.addEventListener("submit", function (event) {
@@ -56,20 +52,25 @@ document.addEventListener("DOMContentLoaded", function () {
       return; // para a função aqui
     }
 
-    //Não cadastrado
-     if (!usuarioSalvo) {
-      mensagem.innerText = "Nenhum usuário cadastrado";
+    if (usuarios.length === 0) {
+      mensagem.innerText = "Usuário não encontrado.";
       mensagem.style.color = "red";
       return;
     }
 
     // SENHA CORRETA
-    if (emailDigitado === emailCorreto && senhaDigitada === senhaCorreta) {
+    const usuarioEncontrado = usuarios.find(function(u){
+      return u.email === emailDigitado && u.senha === senhaDigitada;
+    });
+    
+    if (usuarioEncontrado) {
+      
       mensagem.innerText = "Acesso permitido";
       mensagem.style.color = "green";
 
       //salva que o usuário está logado
       localStorage.setItem("logado","true");
+      localStorage.setItem("usuarioLogado", usuarioEncontrado.nome);
       
       //redireciona para a pagina do painel
       window.location.href = "painel.html";

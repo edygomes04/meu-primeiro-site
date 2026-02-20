@@ -6,15 +6,15 @@
             window.location.href = "index.html"
         }
 
-        //recupera o usuário salvo
-        const usuarioSalvo = JSON.parse(localStorage.getItem("usuario"));
+        //pega o nome do usuário que fez login
+        const nomeUsuario = localStorage.getItem("usuarioLogado");
 
         //pega o span do HTML
         const nomeSpan = document.getElementById("nomeUsuario");
 
-        //se existir usuário, mostra o nome
-        if (usuarioSalvo && nomeSpan) {
-            nomeSpan.innerText = usuarioSalvo.nome;
+        //mostra no painel
+        if (nomeUsuario && nomeSpan) { 
+            nomeSpan.innerText = nomeUsuario;
         }
 
         //para sair
